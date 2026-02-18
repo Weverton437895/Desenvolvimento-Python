@@ -5,7 +5,7 @@ Gerenciador de Mochila para Viagens
 Descrição: Sistema que controla peso máximo de bagagem (23kg)
 permitindo adicionar itens e calculando espaço restante.
 
-Curso: Desenvolvimento Web III-A947-T-D.S.M.-129-20261
+Atividade: Desenvolvimento Web III-A947-T-D.S.M.-129-20261
 """
 
 limitePeso = 23.00
