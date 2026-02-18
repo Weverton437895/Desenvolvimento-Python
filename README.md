@@ -1,11 +1,21 @@
-# Desenvolvimento-Python
+# Desenvolvimento Python
 
 Repositório dedicado aos meus estudos e projetos em Python.
 
 ## Estrutura
 
-- `django/` → Projetos utilizando Django
-- `algoritmos/` → Exercícios e práticas de lógica
+- `Algoritmos/` → Exercícios e práticas de lógica
+- `Desenvolvimento-WebIII/` → Trabalhos da disciplina
+- `Django/` → Projetos web com Django
+
+## Conteúdo
+
+### Algoritmos
+- **Jogo Pedra, Papel e Tesoura** - Jogo interativo contra o computador
+- **Contador de Vogais** - Conta vogais em uma palavra
+
+### Desenvolvimento Web III (2026.1)
+- **Trabalho 01**: Gerenciador de Mochila
 
 ## Tecnologias
 
@@ -14,4 +24,6 @@ Repositório dedicado aos meus estudos e projetos em Python.
 
 ## Objetivo
 
-Aprimorar minhas habilidades em desenvolvimento backend e lógica de programação.
+Desenvolver habilidades em:
+- Desenvolvimento web backend com Python e Django
+- Lógica de programação e resolução de problemas

@@ -6,8 +6,6 @@ Descrição: Sistema que controla peso máximo de bagagem (23kg)
 permitindo adicionar itens e calculando espaço restante.
 
 Curso: Desenvolvimento Web III-A947-T-D.S.M.-129-20261
-Autor: [Seu Nome]
-Data: 18/02/2026
 """
 
 limitePeso = 23.00
