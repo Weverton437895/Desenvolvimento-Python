@@ -4,48 +4,42 @@ Gerenciador de Mochila para Viagens
 
 Descrição: Sistema que controla peso máximo de bagagem (23kg)
 permitindo adicionar itens e calculando espaço restante.
+sem utilizar vetor.
 
 Atividade: Desenvolvimento Web III-A947-T-D.S.M.-129-20261
 """
 
-limitePeso = 23.00
+limitePeso = 23.0
 pesoTotal = 0
-quantoFalta = 0
 
 nomeMochileiro = input("Qual é o seu nome? ")
 print("Olá", nomeMochileiro)
 
-nomeItem = []
+itens = ""
 
 while True:
-   encerrarSelecao = input("Digite fim para encerrar a seleção. Enter para continuar: ")
-   if encerrarSelecao == "fim":
-    break
+    encerrar = input("Digite fim para encerrar ou Enter para continuar: ")
+    if encerrar == "fim":
+        break
 
-   print("------------------------------------------------------------------------------")
-   item = input("Digite o nome do item que deseja levar: ")
-   pesoItem = float(input("Digite o peso do item que deseja levar em kg: "))
-   print("------------------------------------------------------------------------------")
+    item = input("Digite o nome do item: ")
+    pesoItem = float(input("Digite o peso do item em kg: "))
 
-   if pesoTotal + pesoItem <= limitePeso:
-     pesoTotal += pesoItem
-     nomeItem.append(item)
-     quantoFalta = limitePeso - pesoTotal
-     print("O ",item," Foi adicionado. Peso do item ",pesoItem,"kg. Peso atual da mochila ",pesoTotal)
-     print("Falta ",quantoFalta,"kg, Para chegar ao peso total da mochila")
+    if pesoTotal + pesoItem <= limitePeso:
+        pesoTotal += pesoItem
+        itens += item + "\n"
+        print("Item adicionado!")
+    else:
+        print("Peso ultrapassa o limite")
 
-     if pesoTotal == limitePeso:
-      print("Limite de peso atingido.")
-      break
-     
-   else:
-     print("Item selecionado ultrapassa o limite de peso da mochila, item removido")
-     print("Peso atual é ",pesoTotal,"Kg. Item removido")
+    if pesoTotal == limitePeso:
+        print("Limite atingido!")
+        break
 
-quantoFalta = limitePeso - pesoTotal
+espacoRestante = limitePeso - pesoTotal
 
-print("O nome do mochileiro é ",nomeMochileiro,"\nO peso total dos itens é ",pesoTotal,"Kg\nEspaço restante na mochila é ",quantoFalta,"Kg")
-print("------------------------------------------------------------------------------")
-print("Itens adicionados")
-for nome in nomeItem:
-  print(nome)
+print("Nome:", nomeMochileiro)
+print("Peso total:", pesoTotal, "kg")
+print("Espaço restante:", espacoRestante, "kg")
+print("Itens adicionados:")
+print(itens)
