@@ -16,6 +16,8 @@ Repositório dedicado aos meus estudos e projetos em Python.
 
 ### Desenvolvimento Web III (2026.1)
 - **Trabalho 01**: Gerenciador de Mochila
+- **Trabalho 02**: Minigame de adivinhação
+- **Trabalho 03**: Identificador de números primos
 
 ## Tecnologias
 
