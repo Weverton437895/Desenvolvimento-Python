@@ -15,10 +15,10 @@ Repositório dedicado aos meus estudos e projetos em Python.
 - **Contador de Vogais** - Conta vogais em uma palavra
 
 ### Desenvolvimento Web III (2026.1)
-- **Trabalho 01**: Gerenciador de Mochila
-- **Trabalho 02**: Minigame de adivinhação
-- **Trabalho 03**: Identificador de números primos
-- **Trabalho 04**: Agenda Telefônica com Dicionário
+- **Atividade 01**: Gerenciador de Mochila
+- **Atividade 02**: Minigame de adivinhação
+- **Atividade 03**: Identificador de números primos
+- **Atividade 04**: Agenda Telefônica com Dicionário
 
 ## Tecnologias
 
