@@ -18,6 +18,7 @@ Repositório dedicado aos meus estudos e projetos em Python.
 - **Trabalho 01**: Gerenciador de Mochila
 - **Trabalho 02**: Minigame de adivinhação
 - **Trabalho 03**: Identificador de números primos
+- **Trabalho 04**: Agenda Telefônica com Dicionário
 
 ## Tecnologias
 
