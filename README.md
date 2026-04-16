@@ -20,6 +20,7 @@ Repositório dedicado aos meus estudos e projetos em Python.
 - **Atividade 03**: Identificador de números primos
 - **Atividade 04**: Agenda Telefônica com Dicionário
 - **Atividade 05**: SISTEMA DE GERENCIAMENTO DE BIBLIOTECA ORIENTADO A OBJETOS
+- **Atividade 06**: Quiz de Python
 
 ## Tecnologias
 
