@@ -1,0 +1,41 @@
+{% extends 'template.html' %}
+{% block titulo %}Avaliar Compra{% endblock %}
+
+{% block conteudo %}
+
+<div class="dash-header">
+  <div>
+    <span class="section-label">Perfil → Avaliação</span>
+    <h1>Avaliar produto</h1>
+  </div>
+  <a href="{% url 'perfil' %}" class="btn-ghost-sm">← Voltar</a>
+</div>
+
+<div style="max-width:560px;">
+  <div class="compra-item" style="margin-bottom:24px;">
+    <div class="compra-icon">🛍</div>
+    <div>
+      <div class="compra-nome">{{ compra.produto_nome }}</div>
+      <div class="compra-meta">Comprado em {{ compra.data|date:"d/m/Y" }} · R$ {{ compra.valor }}</div>
+    </div>
+  </div>
+
+  <form method="POST">
+    {% csrf_token %}
+    <label>Sua avaliação</label>
+    <textarea name="comentario" placeholder="Conte o que achou do produto..." rows="5" required></textarea>
+
+    <label>Nota</label>
+    <select name="nota" required>
+      <option value="5">⭐⭐⭐⭐⭐ — Excelente</option>
+      <option value="4">⭐⭐⭐⭐ — Bom</option>
+      <option value="3">⭐⭐⭐ — Regular</option>
+      <option value="2">⭐⭐ — Ruim</option>
+      <option value="1">⭐ — Péssimo</option>
+    </select>
+
+    <button type="submit">Enviar avaliação</button>
+  </form>
+</div>
+
+{% endblock %}

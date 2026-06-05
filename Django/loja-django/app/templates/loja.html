@@ -1,0 +1,115 @@
+{% extends 'template.html' %}
+{% block titulo %}Loja{% endblock %}
+
+{% block conteudo %}
+
+<section class="loja-header">
+  <span class="section-label">Catálogo</span>
+  <h1>Nossos Produtos</h1>
+  <p class="loja-subtitle">Descubra nossa seleção curada de produtos com a melhor qualidade e preço.</p>
+</section>
+
+{% if not request.user.is_authenticated %}
+<div class="alert alert--info" style="margin-bottom:24px;">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+  <a href="{% url 'login' %}">Faça login</a>&nbsp;para poder comprar produtos.
+</div>
+{% endif %}
+
+{% if produtos or produtos_api %}
+<div class="loja-grid">
+
+  {# ── Produtos do banco ── #}
+  {% for prod in produtos %}
+  <div class="product-card">
+    <div class="product-img-wrap">
+      {% if prod.imagem %}
+        <img src="{{ prod.imagem.url }}" alt="{{ prod.nome }}">
+      {% else %}
+        <div class="product-img-placeholder">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+            <path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>
+          </svg>
+        </div>
+      {% endif %}
+      {% if prod.categoria %}
+        <span class="product-badge">{{ prod.categoria }}</span>
+      {% endif %}
+    </div>
+    <div class="product-info">
+      <h3 class="product-name">{{ prod.nome }}</h3>
+      <div class="product-meta">
+        {% if prod.quantidade > 0 %}
+          <span style="color:var(--emerald);">● Em estoque ({{ prod.quantidade }})</span>
+        {% else %}
+          <span style="color:var(--rose);">● Esgotado</span>
+        {% endif %}
+      </div>
+      <div class="product-footer">
+        <span class="product-price">R$ {{ prod.preco }}</span>
+        {% if request.user.is_authenticated %}
+          {% if prod.quantidade > 0 %}
+            <form method="post" action="{% url 'comprarProdutoApi' %}" style="margin:0;">
+              {% csrf_token %}
+              <button type="submit" class="btn-comprar" style="margin-top:0;">Comprar</button>
+            </form>
+          {% else %}
+            <span class="badge badge--rose">Esgotado</span>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {# ── Produtos da API ── #}
+  {% for prod in produtos_api %}
+  <div class="product-card">
+    <div class="product-img-wrap">
+      {% if prod.image %}
+        <img src="{{ prod.image }}" alt="{{ prod.title }}">
+      {% else %}
+        <div class="product-img-placeholder">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+            <path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>
+          </svg>
+        </div>
+      {% endif %}
+      <span class="product-badge">{{ prod.category }}</span>
+    </div>
+    <div class="product-info">
+      <h3 class="product-name">{{ prod.title|truncatechars:50 }}</h3>
+      <div class="product-meta"><span style="color:var(--emerald);">● Disponível</span></div>
+      <div class="product-footer">
+        <span class="product-price">R$ {{ prod.price }}</span>
+        {% if request.user.is_authenticated %}
+          <form method="post" action="{% url 'comprarProdutoApi' %}">
+              {% csrf_token %}
+              <input type="hidden" name="id_produto" value="{{ prod.id }}">
+              <input type="hidden" name="nome" value="{{ prod.nome }}">
+              <input type="hidden" name="preco" value="{{ prod.preco }}">
+              <button type="submit" class="btn-comprar">Comprar</button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% else %}
+<div class="empty-state">
+  <span class="empty-icon">
+    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+      <path d="M3 6h18M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+  </span>
+  <h2>Nenhum produto disponível</h2>
+  <p>Em breve novos produtos serão adicionados.</p>
+</div>
+{% endif %}
+
+{% endblock %}

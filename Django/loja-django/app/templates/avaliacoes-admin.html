@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Painel de Avaliações</h1>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Cliente</th>
+        <th>Produto</th>
+        <th>Nota</th>
+        <th>Comentário</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for avaliacao in avaliacoes %}
+    <tr>
+        <td>{{ avaliacao.cliente }}</td>
+        <td>{{ avaliacao.produto }}</td>
+        <td>{{ avaliacao.nota }}</td>
+        <td>{{ avaliacao.comentario }}</td>
+        <td>
+            <a href="{% url 'delavaliacaoadmin' avaliacao.id %}">
+                Excluir
+            </a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">Nenhuma avaliação encontrada.</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

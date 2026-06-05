@@ -1,0 +1,78 @@
+{% extends 'template.html' %}
+{% block titulo %}Home{% endblock %}
+
+{% block conteudo %}
+
+<section class="hero">
+  <div class="hero-badge">✦ Nova Coleção 2025</div>
+  <h1 class="hero-title">Vista-se com estilo</h1>
+  <p class="hero-subtitle">
+    Roupas e acessórios cuidadosamente selecionados. Descubra nossa coleção e encontre o seu estilo.
+  </p>
+  {% if not request.user.is_authenticated %}
+  <div class="hero-actions">
+    <a href="{% url 'cadastro' %}" class="btn-primary">Criar conta grátis →</a>
+    <a href="{% url 'loja' %}" class="btn-ghost">Ver produtos</a>
+  </div>
+  {% else %}
+  <div class="hero-actions">
+    <a href="{% url 'loja' %}" class="btn-primary">Explorar loja →</a>
+    <a href="{% url 'perfil' %}" class="btn-ghost">Meu perfil</a>
+  </div>
+  {% endif %}
+</section>
+
+<section class="home-section">
+  <div class="review-form-section">
+    <span class="section-label">Avaliações</span>
+    <h2>O que nossos clientes dizem</h2>
+
+    {% if request.user.is_authenticated %}
+    <form method="POST" action="{% url 'index' %}">
+      {% csrf_token %}
+      <label>Seu comentário</label>
+      <textarea name="comentario" placeholder="Conte sua experiência com a StyleShop..." required></textarea>
+      <label>Nota (1 a 5)</label>
+      <input type="number" name="nota" min="1" max="5" placeholder="5" required>
+      <button type="submit">Enviar avaliação</button>
+    </form>
+    {% else %}
+    <p style="margin-top:0;">
+      <a href="{% url 'login' %}">Faça login</a> para deixar sua avaliação.
+    </p>
+    {% endif %}
+  </div>
+
+  {% if avaliacoes %}
+  <div class="reviews-grid">
+    {% for a in avaliacoes %}
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">{{ a.cliente|slice:":2"|upper }}</div>
+        <div>
+          <div class="review-author">{{ a.cliente }}</div>
+          {% if a.produto %}<div class="review-product">{{ a.produto }}</div>{% endif %}
+        </div>
+      </div>
+      <p class="review-comment">"{{ a.comentario }}"</p>
+      <div class="review-stars">
+        {% with nota=a.nota %}
+          {% for i in "12345" %}{% if forloop.counter <= nota %}⭐{% endif %}{% endfor %}
+          {{ nota }}/5
+        {% endwith %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state" style="padding:40px 0;">
+    <p>Ainda não há avaliações. Seja o primeiro!</p>
+  </div>
+  {% endif %}
+
+  <div style="text-align:center; margin-top:40px;">
+    <a href="{% url 'loja' %}" class="btn-primary">Explorar a Loja →</a>
+  </div>
+</section>
+
+{% endblock %}

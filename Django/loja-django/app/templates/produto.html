@@ -1,0 +1,99 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Django Produtos{% endblock %}
+
+{% block conteudo %}
+
+<h1>Produtos</h1>
+<hr>
+
+<a href="{% url 'addproduto' %}">Adicionar Produto</a>
+
+<br><br>
+
+<p>Banco: {{ produtos|length }}</p>
+<p>API: {{ produtos_api|length }}</p>
+
+<h2>Produtos do Banco</h2>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Foto</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prod in produtos %}
+        <tr>
+            <td>{{ prod.id }}</td>
+            <td>
+                {% if prod.imagem %}
+                    <img src="{{ prod.imagem.url }}" width="50">
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td>{{ prod.nome }}</td>
+            <td>R$ {{ prod.preco }}</td>
+            <td>{{ prod.categoria }}</td>
+            <td>
+                <a href="{% url 'editproduto' prod.id %}">Editar</a>
+                |
+                <a href="{% url 'delProduto' prod.id %}">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" style="text-align:center;">
+                Nenhum produto cadastrado.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br><br>
+
+<h2>Produtos da API</h2>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Foto</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prod in produtos_api %}
+        <tr>
+            <td>{{ prod.id }}</td>
+            <td>
+                {% if prod.image %}
+                    <img src="{{ prod.image }}" width="50">
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td>{{ prod.title }}</td>
+            <td>R$ {{ prod.price }}</td>
+            <td>{{ prod.category }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align:center;">
+                Nenhum produto da API encontrado.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
