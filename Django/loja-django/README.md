@@ -1,6 +1,6 @@
 # Sistema de Loja com Django
 
-Desenvolvendo um sistema web de loja virtual desenvolvido com Django. Para aprimorar as habilidades com python e django. O projeto possui autenticação de usuários, painel administrativo, gerenciamento de produtos e integração com API externa para exibição de produtos.
+Desenvolvendo um sistema web de loja virtual para aprimorar habilidades em Python e Django. O projeto possui autenticação de usuários, painel administrativo, gerenciamento de produtos e integração com API externa para exibição de produtos.
 
 ---
 
